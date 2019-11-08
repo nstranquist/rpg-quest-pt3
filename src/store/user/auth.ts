@@ -32,7 +32,7 @@ type AuthActionTypes =
   | attemptSignup
   | logout
   | setAuthError
-  | { type: 'LOADING_AUTH' }
+  | { readonly type: 'LOADING_AUTH' }
 
 
 // ACTIONS:
