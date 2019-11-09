@@ -17,9 +17,9 @@ const BoxSidebar: React.FC<IProps> = ({
 }) => (
   <div className={'box-sidebar box-sidebar-' + direction}>
     <div className="container sidebar">
-      <div className="section-header" style={{ display: headerDisplay }}>{sectionHeader}</div>
-      <img src={imgSrc} alt={imgAlt}
-        className="img-fluid" />
+      <div className="section-header" style={{ display: headerDisplay }}>
+        {sectionHeader}</div>
+      <img src={imgSrc} alt={imgAlt} className="img-fluid" />
     </div>
   </div>
 )

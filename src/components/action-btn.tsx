@@ -2,36 +2,29 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 
 interface IProps {
-  linkRoute?: string
+  linkRoute: string
   linkName: string
   margin?: string
   backgroundSize?: string
   fontSize?: string
   padding?: string
-  onClick?(): void
 }
 
 const ActionButton: React.FC<IProps> = ({
-  linkRoute='/',
+  linkRoute,
   linkName,
   margin,
   backgroundSize,
-  onClick,
   fontSize,
   padding
 }) => (
-  <div className="box-btn" style={{
-    margin: margin,
-    backgroundImage,
+  <div className="box-btn" style={{ margin, backgroundImage,
   }}>
     <div className="container btn-container" style={{
       backgroundSize,
     }}>
       <Link to={linkRoute} className="action-btn"
-        style={{
-          lineHeight, userSelect: 'none', MozUserSelect: 'none', fontSize, padding
-        }}
-        onClick={onClick}>
+        style={{ lineHeight, userSelect: 'none', MozUserSelect: 'none', fontSize, padding }}>
         {linkName}
       </Link>
     </div>
