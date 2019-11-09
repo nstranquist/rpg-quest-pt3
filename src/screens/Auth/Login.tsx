@@ -40,12 +40,12 @@ const Login: React.FC<IProps> = ({
         <div className="formItem">
           {/* <label htmlFor="email">Email</label> */}
           <input type="text" id="username" value={email} placeholder="Email..."
-            onInput={(e) => setEmail(e.currentTarget!.value)} />
+            onChange={(e) => setEmail(e.target!.value)} />
         </div>
         <div className="formItem">
           {/* <label htmlFor="password">Password</label> */}
           <input type="password" id="password" value={password} placeholder="*******" 
-            onInput={(e) => setPassword(e.currentTarget!.value)}/>
+            onChange={(e) => setPassword(e.target!.value)}/>
         </div>
         {!loadingAuth ? (
           <button type="submit">Login</button>

@@ -63,10 +63,12 @@ class Home extends React.Component<IProps, IState> {
     return (
       <div className="grid home-grid">
         <MusicCheckbox />
-        <InventoryBox playerName={name}
-          playerLevel={level!}
+        <InventoryBox
+          playerName={name}
           playerXP={xp!}
-          playerGold={gold!} />
+          playerLevel={level!}
+          playerGold={gold!}
+          playerHP={xp!} />
         <BoxHeader title='RPGQuest' />
         <BoxSidebar headerDisplay='none'
           imgSrc='/images/player-m-02.png'

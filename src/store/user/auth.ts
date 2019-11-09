@@ -60,8 +60,14 @@ export const attemptSignup = (username: string, email: string, password: string)
       dispatch({ type: 'AUTHENTICATE'})
       firestore
         .doc(`/profiles/${user.user!.uid}`)
-        .set({ username })
-        .catch(err => console.log(err))
+        .set({
+          username,
+          hp: 0,
+          xp: 0,
+          level: 0,
+          gold: 0,
+        })
+        .catch(err => console.log(err)) // shouldn't be an error here, so not dispatching
     })
     .catch(err => {
       console.log('signup error:', err)

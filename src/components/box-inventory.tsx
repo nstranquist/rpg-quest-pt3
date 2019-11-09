@@ -1,17 +1,19 @@
 import React from 'react';
 
 interface IProps {
-  playerName: string,
-  playerLevel: number,
-  playerXP: number,
+  playerName: string
+  playerXP: number
+  playerLevel: number
   playerGold: number
+  playerHP: number
 }
 
 const InventoryBox: React.FC<IProps> = ({
   playerName,
   playerLevel,
   playerXP,
-  playerGold
+  playerGold,
+  playerHP
 }) => (
   <div className='top-inventory' style={{
     position: 'absolute',
@@ -26,6 +28,7 @@ const InventoryBox: React.FC<IProps> = ({
       <div>Lvl: <span style={{ float: 'right' }}>{playerLevel}</span></div>
       <div>xp: <span style={{ float: 'right' }}>{playerXP}</span></div>
       <div>gold: <span style={{ float: 'right' }}>{playerGold}</span></div>
+      <div>health: <span style={{ float: 'right' }}>{playerHP}</span></div>
     </div>
   </div>
 )
