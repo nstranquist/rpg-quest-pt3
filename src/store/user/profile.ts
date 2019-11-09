@@ -4,7 +4,7 @@ import { Dispatch } from 'redux'
 import { auth, firestore } from '../../fbConfig'
 
 // TYPES:
-interface ProfileState {
+export interface ProfileState {
   name: string
   xp: number | null  // move to backend
   level: number | null // move to backend
@@ -23,8 +23,8 @@ type ProfileActionTypes =
 
 
 // ACTIONS:
-export const setProfileData = () => (dispatch: Dispatch) => {
-  console.log('called set profile data action')
+export const getProfileData = () => (dispatch: Dispatch) => {
+  console.log('called get profile data action')
 }
 
 

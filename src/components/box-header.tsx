@@ -3,7 +3,7 @@ import React from 'react'
 interface IProps {
   title: string,
   titlePadding?: string,
-  fontSize: string
+  fontSize?: string
   colEnd?: number
   colStart?: number
   style?: any
