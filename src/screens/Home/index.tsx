@@ -1,5 +1,7 @@
 import React from 'react'
 
+import '../screen.css'
+
 const Home = () => {
   return (
     <div>

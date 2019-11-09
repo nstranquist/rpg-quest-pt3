@@ -15,8 +15,10 @@ const TitleScreen: React.FC<IProps> = ({
   const [idInput, setIdInput] = React.useState('')
 
   const toggleOverlay = () => {
-    // document.querySelector('.screen-overlay')!.style.display = 'none';
-    // document.querySelector('.title-screen-ui')!.style.zIndex = '1';
+    //@ts-ignore
+    document.querySelector('.screen-overlay')!.style.display = 'none';
+    //@ts-ignore
+    document.querySelector('.title-screen-ui')!.style.zIndex = '1';
     toggleAudio()
   }
 
@@ -29,7 +31,7 @@ const TitleScreen: React.FC<IProps> = ({
       position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, width: '100%', height: '100%', zIndex: 1000
     }}>
       <div className="screen-overlay" onClick={toggleOverlay} style={{
-        display: 'none', // fixed
+        display: 'fixed', // fixed or none
         top: 0,
         left: 0,
         right: 0,
@@ -58,16 +60,14 @@ const TitleScreen: React.FC<IProps> = ({
         display: 'flex', flexDirection: 'column', justifyContent: 'space-around', alignItems: 'center'
       }}>
         <BoxHeader title='RPG Quest' fontSize='3em' style={{ display: 'absolute', top: '1em' }} />
-        {!showLogin && <div>
+        {!showLogin ? <div>
           <BoxMessageButton screenLink='home' buttonName='Start Game' />
           <BoxMessageButton screenLink='login' buttonName='Login' handleOnClick={() => {
             //const newLoginState = !showLogin
             //setShowLogin(newLoginState)
           }} />
           <BoxMessageButton screenLink='signup' buttonName='Create Account' />
-        </div>}
-        {/* only show when showLogin is true, position in center of screen */}
-        {showLogin && (
+        </div> : (
           <div className="login-input">
             <input onInput={(e: any) => setIdInput(e.target.value)} value={idInput} type="text" placeholder="enter your login id" />
             <button onClick={() => {

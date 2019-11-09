@@ -11,12 +11,15 @@ import './App.css';
 const App: React.FC = () => {
   return (
     <Router>
-      <Switch>
-        <Route path='/login' component={Login} />
-        <Route path='/signup' component={Signup} />
-        <PrivateRoute path='/home' component={Home} />
-        <Route path='/' component={Title} />
-      </Switch>
+      <main className="aspect">
+        <audio id="title_music" src="/music/castle-in-the-sky-remix.mp3" autoPlay loop />
+        <Switch>
+          <Route path='/login' component={Login} />
+          <Route path='/signup' component={Signup} />
+          <PrivateRoute path='/home' component={Home} />
+          <Route path='/' component={Title} />
+        </Switch>
+      </main>
     </Router>
   );
 }

@@ -1,0 +1,183 @@
+/* possible class names? */
+/*
+.screen-container
+.btn-container
+.action-btn
+.header-title
+.header-section
+.content-section
+.player-container
+...
+*/
+/*:root {
+  --light-font-color: rgba(255,255,255,.9);
+  --headerHeight: 20%;
+}*/
+
+/*#region LAYOUT */
+.aspect {
+  width: 100vw; 
+  height: 75vw; /* height:width ratio = 9/16 = .5625  */
+  background: pink;
+  max-height: 100vh;
+  max-width: 133.33vh; /* 16/9 = 1.778 */
+  margin: 0 auto;
+  position: absolute;
+  top:0;bottom:0; /* vertical center */
+  left:0;right:0; /* horizontal center */
+  background-image: url('/images/bg-screen.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.grid {
+  display: grid;
+  grid-template-rows: 20% 1fr 1fr 1fr;
+  width: 100%;
+  height: 100%;
+}
+.home-grid {
+  grid-template-columns: 50% 25% 25%;
+}
+.battle-grid {
+  grid-template-columns: 40% 20% 40%;
+}
+.profile-grid {
+  margin-left: 1em;
+  margin-right: 1em;
+  grid-template-columns: 20% calc(60% - 2em) 20%;
+}
+.shop-grid {
+  grid-template-columns: repeat(14, 1fr);
+  grid-template-rows: 20% 4fr 1fr;
+  grid-row-gap: -.5em;
+}
+.shop-grid .shop-action-btn {
+  margin: 1em;
+}
+.grid > * {
+  outline: 1px solid black;
+}
+.box-inventory {
+  grid-column-start: 2;
+  grid-column-end: 14;
+  grid-row-start: 2;
+  grid-row-end: 3;
+}
+/*#endregion LAYOUT */
+
+/*#region HEADER_SECTION */
+.box-header {
+  /* grid */
+  grid-column-start: 1;
+  grid-column-end: 4;
+  grid-row-start: 1;
+  grid-row-end: 2;
+  display: flex;
+  justify-content: center;
+  align-items: start;
+}
+.title-header {
+  display: inline-block;  
+  padding: 1em;
+  padding-bottom: 1.25em;
+  font-size: 2em;
+  line-height: 1em;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.897);
+  background: url('/images/bg-header.png');
+  background-repeat: no-repeat;
+  background-size: 100% 150%;
+  background-position: center;
+}
+/*#endregion HEADER_SECTION */
+
+/*#region SIDEBAR */
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+.box-sidebar {
+  position: relative;
+  grid-row-start: 2;
+  grid-row-end: 6;
+}
+.box-sidebar-left {
+  grid-column-start: 1;
+}
+.box-sidebar-center {
+  grid-column-start: 2;
+  grid-column-end: 3;
+}
+.box-sidebar-right {
+  grid-column-start: 3;
+  grid-column-end: 4;
+}
+.section-header {
+  font-size: 2em;
+  line-height: 1.2em; 
+  position: absolute;
+  top: -1.2em; /* 1.2em line-height + .5em space */
+  left: -.55em;
+  width: 100%; /* to add items to */
+  background: #333;
+  color: gold;
+  padding-left: .75em;
+  padding-right: .75em;
+  box-shadow: 30px -5px 30px 10px rgba(255,255,255,.42);
+}
+.box-sidebar-left .section-header {
+  border-top-right-radius: 2em;
+}
+.box-sidebar-right .section-header {
+  left: initial;
+  right: -.55em;
+  text-align: right;
+  border-top-left-radius: 2em;
+  box-shadow: -30px -5px 30px 10px rgba(0,0,0,.5);
+}
+/*#endregion SIDEBAR*/
+
+/*#region BUTTON_MENU */
+.container {
+  /*margin: 1em; /* must be 1/2 the width rem and height rem 
+  /* can optionally delete these */
+  /*width: calc(100% - 2em);
+  height: calc(100% - 2em);*/
+  width: 90%;
+  height: 100%;
+  margin: 0 auto;
+  outline: 1px solid black;
+  /*background: #333;*/
+  position: relative;
+}
+.btn-container {
+  background-image: url('/images/button.png');
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  background-position: center;
+  /* layout */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.action-btn {
+  font-size: 1.5em;
+  width: 100%;
+  text-align: center;
+}
+/*#endregion BUTTON_MENU */
+
+.img-fluid {
+  max-height: 100%;
+  height: 100%;
+  max-width: 100%;
+  width: auto;
+  margin: 0 auto;
+  margin-bottom: 1em;
+}
+.box-btn {
+  border: 3px solid #333;
+  background-size: 150% 150%;
+}
