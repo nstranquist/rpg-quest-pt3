@@ -1,7 +1,11 @@
 import { combineReducers } from 'redux'
 import user from './user'
 
-export default combineReducers({
+const rootApp = combineReducers({
   user,
 
 })
+
+export default rootApp
+
+export type RootState = ReturnType<typeof rootApp>
