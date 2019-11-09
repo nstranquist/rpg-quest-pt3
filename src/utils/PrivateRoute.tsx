@@ -1,5 +1,5 @@
 import React from 'react'
-import { Route, Redirect } from 'react-router-dom';
+import { Route, Redirect, Link } from 'react-router-dom';
 import { connect } from 'react-redux'
 import { RootState } from '../store/root'
 
@@ -20,7 +20,11 @@ const PrivateRoute: React.FC<IProps> = ({
       isAuth ? (
         <Component {...props} />
       ) : (
-        <Redirect to='/' />
+        // <Redirect to='/' />
+        <div>
+          <div>Error, you aren't logged in yet</div>
+          <Link to='/'>Go Back</Link>
+        </div>
       )}
   />
 )
