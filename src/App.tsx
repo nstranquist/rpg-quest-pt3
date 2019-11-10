@@ -5,7 +5,7 @@ import Home from './screens/Home'
 import Title from './screens/Title'
 import Castle from './screens/Castle'
 import Battle from './screens/Battle'
-//import Shop from './screens/Shop'
+import Shop from './screens/Shop'
 //import Profile from './screens/Profile'
 import Login from './screens/Auth/Login'
 import Signup from './screens/Auth/Signup'
@@ -25,7 +25,7 @@ const App: React.FC = () => {
           <PrivateRoute path='/home' component={Home} />
           <PrivateRoute path='/battle' component={Battle} />
           <PrivateRoute path='/profile' component={Castle} />
-          <PrivateRoute path='/shop' component={Castle} />
+          <PrivateRoute path='/shop' component={Shop} />
           <PrivateRoute path='/castle' component={Castle} />
           <Route exact path='/' component={Title} />
           <Route path='/' render={() => <Redirect to='/' />} />
