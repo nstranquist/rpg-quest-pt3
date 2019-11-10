@@ -58,7 +58,7 @@ const initialState: ProfileState = {
   gold: null,
   hp: null,
   loading: false,
-  errors: null
+  errors: null,
 }
 
 const profileReducer = (

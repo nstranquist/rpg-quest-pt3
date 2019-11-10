@@ -22,10 +22,10 @@ const InventoryBox: React.FC<IProps> = ({
   }}>
     <div style={{
       position: 'relative', width: '100%', height: '100%', border: '1px solid red', color: 'white',
-      background: '#333', padding: '0 .2em .2em .2em'
+      background: '#333', padding: '.2em .3em .2em .3em'
     }}>
       <div style={{ textAlign: 'center' }}>{playerName}</div>
-      <div>Lvl: <span style={{ float: 'right' }}>{playerLevel}</span></div>
+      <div>lvl: <span style={{ float: 'right' }}>{playerLevel}</span></div>
       <div>xp: <span style={{ float: 'right' }}>{playerXP}</span></div>
       <div>gold: <span style={{ float: 'right' }}>{playerGold}</span></div>
       <div>health: <span style={{ float: 'right' }}>{playerHP}</span></div>

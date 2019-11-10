@@ -12,8 +12,8 @@ const BoxSidebar: React.FC<IProps> = ({
   sectionHeader,
   imgSrc,
   imgAlt,
+  headerDisplay,
   direction = 'left',
-  headerDisplay
 }) => (
   <div className={'box-sidebar box-sidebar-' + direction}>
     <div className="container sidebar">

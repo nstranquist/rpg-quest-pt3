@@ -1,15 +1,16 @@
 import React from 'react';
 //import { connect } from 'react-redux'
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
+import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom'
 import Home from './screens/Home'
 import Title from './screens/Title'
 import Castle from './screens/Castle'
-//import Battle from './screens/Battle'
+import Battle from './screens/Battle'
 //import Shop from './screens/Shop'
 //import Profile from './screens/Profile'
 import Login from './screens/Auth/Login'
 import Signup from './screens/Auth/Signup'
 import PrivateRoute from './utils/PrivateRoute'
+
 import './App.css';
 
 const App: React.FC = () => {
@@ -22,11 +23,12 @@ const App: React.FC = () => {
           <Route path='/signup' component={Signup} />
           {/* can look into nesting private routes later */}
           <PrivateRoute path='/home' component={Home} />
-          <PrivateRoute path='/battle' component={Castle} />
+          <PrivateRoute path='/battle' component={Battle} />
           <PrivateRoute path='/profile' component={Castle} />
           <PrivateRoute path='/shop' component={Castle} />
           <PrivateRoute path='/castle' component={Castle} />
-          <Route path='/' component={Title} />
+          <Route exact path='/' component={Title} />
+          <Route path='/' render={() => <Redirect to='/' />} />
         </Switch>
       </main>
     </Router>

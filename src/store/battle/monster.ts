@@ -1,0 +1,1 @@
+export const monster = 'monster' //placeholder

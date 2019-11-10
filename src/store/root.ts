@@ -1,9 +1,12 @@
 import { combineReducers } from 'redux'
 import user from './user'
+import battle from './battle'
+import game from './game'
 
 const rootApp = combineReducers({
   user,
-
+  battle,
+  game,
 })
 
 export default rootApp

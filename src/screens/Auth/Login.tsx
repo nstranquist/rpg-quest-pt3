@@ -22,15 +22,15 @@ const Login: React.FC<IProps> = ({
 }) => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-  if(isAuth) {
+  
+  if(isAuth)
     return <Redirect to='/home' />
-  }
+  
   return (
     <div>
       <BoxHeader title="Login" fontSize="32" />
       <form style={loginFormStyle} onSubmit={(e) => {
         e.preventDefault()
-        console.log('attempting login with email:', email, 'and password:', password)
         attemptLogin(email, password)
       }}>
         {errors && <div style={{color: 'red', fontSize: '26px'}}>
