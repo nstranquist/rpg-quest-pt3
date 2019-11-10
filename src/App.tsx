@@ -6,7 +6,7 @@ import Title from './screens/Title'
 import Castle from './screens/Castle'
 import Battle from './screens/Battle'
 import Shop from './screens/Shop'
-//import Profile from './screens/Profile'
+import Character from './screens/Character'
 import Login from './screens/Auth/Login'
 import Signup from './screens/Auth/Signup'
 import PrivateRoute from './utils/PrivateRoute'
@@ -24,7 +24,7 @@ const App: React.FC = () => {
           {/* can look into nesting private routes later */}
           <PrivateRoute path='/home' component={Home} />
           <PrivateRoute path='/battle' component={Battle} />
-          <PrivateRoute path='/profile' component={Castle} />
+          <PrivateRoute path='/character' component={Character} />
           <PrivateRoute path='/shop' component={Shop} />
           <PrivateRoute path='/castle' component={Castle} />
           <Route exact path='/' component={Title} />

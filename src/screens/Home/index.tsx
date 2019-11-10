@@ -55,7 +55,7 @@ class Home extends React.Component<IProps> {
           imgAlt='A brave warrior' />
           {/* 4 boxes in a square (hence the different margin style values) */}
         <MenuButton linkName='Battle' linkRoute='/battle' margin='1em 0 0 1em' lineHeight={lineHeight} backgroundImage={actionBtnBg} />
-        <MenuButton linkName='Character' linkRoute='/profile' margin='1em 1em 0 0' lineHeight={lineHeight} backgroundImage={actionBtnBg} />
+        <MenuButton linkName='Character' linkRoute='/character' margin='1em 1em 0 0' lineHeight={lineHeight} backgroundImage={actionBtnBg} />
         <MenuButton linkName='Shop' linkRoute='/shop' margin='0 0 1em 1em' lineHeight={lineHeight} backgroundImage={actionBtnBg} />
         <MenuButton linkName='Castle' linkRoute='/castle' margin='0 1em 1em 0' lineHeight={lineHeight} backgroundImage={actionBtnBg} />
         <MessageBox message='Battle Monsters to start earning gold and xp!' />
