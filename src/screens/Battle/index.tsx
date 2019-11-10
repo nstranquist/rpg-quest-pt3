@@ -7,7 +7,8 @@ import ActionButton from '../../components/action-btn'
 import HUD from '../../components/HUD'
 
 //import Battle from '../containers/battle'
-import { startBattle } from '../../store/battle'
+import { startBattle, startPlayerTurn, startMonsterTurn, endBattle } from '../../store/battle'
+import { playerIsAlive, monsterIsAlive } from '../../store/selectors'
 import { RootState } from '../../store/root'
 //import { battle } from '../../store/battle/battle'
 
@@ -18,7 +19,14 @@ interface IProps {
   player: any
   battle: any
   monsterHealth: number
+  playerIsAlive: boolean
+  monsterIsAlive: boolean
+  xpReward: number
+  goldReward: number
   startBattle(): void
+  startPlayerTurn(): void
+  startMonsterTurn(): void
+  endBattle(playerWon: boolean): void
 }
 interface IState {
   winner: boolean
@@ -36,7 +44,8 @@ class Battle extends React.Component<IProps, IState> {
     this.state = {
       winner: false,
       whoWon: '',
-      playersTurn: Math.floor(Math.random() * 2) === 0 ? true : false,
+      //playersTurn: Math.floor(Math.random() * 2) === 0 ? true : false,
+      playersTurn: true,
       playerHUDRatio: `${this.props.player.hp / 100}em`,  // if 100 health, for every 1 pt, deducts .1em (the HUD ratio)
       monsterHUDRatio: `${this.props.monsterHealth / 100}em`,
     }
@@ -54,50 +63,31 @@ class Battle extends React.Component<IProps, IState> {
     //console.log('componentWillUnmount');
   }
 
-  startBattle = () => {
-    console.log(this.state.playersTurn);
-    //if (this.props.player.hp <= 0) {
-    //  console.log('You are already... DEAD');
-    //  this.toggleScreen({ 'screenName': 'home' });
-    //}
-    //this.battle.startBattle();
-    //if (!this.state.playersTurn) {
-    //  this.battle.startMonsterRound();
-    //  setTimeout(() => this.toggleBattleMenu(), 1000); // toggle nav
-    //}
-  }
-
-  //endGame = (whoWon) => {
-  //  console.log(whoWon + ' won!');
-  //  this.setState({
-  //    winner: true,
-  //    whoWon: whoWon,
-  //  });
-  //}
-
   handleAttack = () => {
     console.log('damage called');
-    // disable attack buttons
     this.setState({ playersTurn: false });
     // start battle round
-    //let winner = this.battle.startRound();
-    // check for winner
-    //if (winner)
-    //  this.endGame('player');
-    // replace
-    //else {
-      // if no winner, play monster round
-      //winner = this.battle.startMonsterRound();
-      //if (this.props.)  // selector
-      //  this.endGame('monster');
-    //}
-    // toggle nav
-    setTimeout(() => this.toggleBattleMenu(), 1000);
+    this.props.startPlayerTurn()  // can add checking for player defeat inside thunk
+    if(!this.props.monsterIsAlive) {
+      console.log('monster has been defeated')
+      this.setState({ winner: true })
+      this.props.endBattle(true) // playerWon = true
+    }
+    else {
+      setTimeout(() => {
+        this.props.startMonsterTurn()
+        if(!this.props.playerIsAlive) {  // may need to make async
+          console.log('player has been defeated')
+          this.setState({ winner: true })
+          this.props.endBattle(false) //playerWon = false
+        }
+        else this.toggleBattleMenu()
+      }, 1000)
+    }
   }
 
   toggleBattleMenu = () => {
-    this.setState({ playersTurn: true });
-    this.render();
+    this.setState({ playersTurn: true }, () => this.render())
   }
 
   handleUseItem = () => console.log('item used')
@@ -107,12 +97,12 @@ class Battle extends React.Component<IProps, IState> {
   render() {
     const {
       loading,
-      monsterHealth,
+      //monsterHealth,
       monsterDamage,
       xpReward,
       goldReward,
       otherReward,
-      playerTurn,
+      //playerTurn,
     } = this.props.battle
 
     return (
@@ -161,9 +151,18 @@ class Battle extends React.Component<IProps, IState> {
             //display: 'flex',
             //flexDirection: 'column',
             //justifyContent: 'center',
+            // TODO: make props below respect their parent
           }}>
-            <div style={{ height: '4em', width: '100%', background: 'beige' }}>
-              {this.state.whoWon === 'player' ? 'You Won!' : 'You Lost!'}
+            <div style={{ height: '6em', width: '100%', background: 'beige' }}>
+              {this.props.playerIsAlive ? (
+                <div>
+                  You Won!
+                  <p>+{this.props.xpReward} xp</p>
+                  <p>+{this.props.goldReward} gold</p>
+                </div>
+              ): (
+                'You Lost!'
+              )}
             </div>
             <ActionButton linkName="Go Back" linkRoute='/home' lineHeight={lineHeight}
               backgroundSize={backgroundSize} margin={margin} />
@@ -177,13 +176,15 @@ class Battle extends React.Component<IProps, IState> {
 const mapStateToProps = (state: RootState) => ({
   player: state.user.profile,
   battle: state.battle,
-  monsterHealth: state.battle.monsterHealth,
-  //isPlayerDead selector here(same for monster)
+  xpReward: state.battle.xpReward,
+  goldReward: state.battle.goldReward,
+  playerIsAlive: playerIsAlive(state),
+  monsterIsAlive: monsterIsAlive(state),
 })
 
 export default connect(
   mapStateToProps,
-  { startBattle }
+  { startBattle, startPlayerTurn, startMonsterTurn, endBattle }
 )(Battle)
 
 

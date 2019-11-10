@@ -30,7 +30,7 @@ export interface startBattle {
 }
 export interface damageMonster {
   readonly type: 'DAMAGE_MONSTER'
-  dmg: number
+  damage: number
 }
 // export interface endBattle {
 //   readonly type: 'CLEAR_BATTLE'
@@ -74,23 +74,55 @@ export const startBattle = () => (dispatch: Dispatch, getState: any) => {
       dispatch({
         type: 'SET_BATTLE',
         monsterName: monster.data().name,
-        monsterHealth: monster.data().monsterHealth * playerLevel,  // a linear increase. TODO: fix to be more natural
-        monsterDamage: monster.data().monsterDamage * playerLevel,
+        monsterHealth: monster.data().baseHealth * playerLevel,  // a linear increase. TODO: fix to be more natural
+        monsterDamage: monster.data().baseDamage * playerLevel,
         // will hardcode the reward for now
         // TODO: add baseReward and randomReward game logic
         xpReward: 15,
         goldReward: 25,
         otherReward: null
       })
-      // set reward
     })
     .catch(err => {
       dispatch({ type: 'SET_BATTLE_ERROR' })
       console.log(err)
     })
 }
-export const endBattle = () => (dispatch: Dispatch) => {
+// IDEA: replace getState with data from component? which way is better?
+export const startPlayerTurn = () => (dispatch: Dispatch, getState: any) => {
+  console.log('round started')
+  console.log('player attacks')
+  //player attacks monster
+  dispatch({ type: 'DAMAGE_MONSTER', damage: getState().user.profile.damage })
+  if(getState().battle.monsterHealth < 1) {
+    console.log('player wins')
+    endBattle(true)
+  }
+}
+
+export const startMonsterTurn = () => (dispatch: Dispatch, getState: any) => {
+  console.log('monster attacks')
+  //monster attacks player
+  dispatch({ type: 'DAMAGE_PLAYER', damage: getState().battle.monsterDamage })
+  if(getState().battle.playerHealth < 1) {
+    console.log('monster wins')
+    endBattle(false)
+  }
+  else dispatch({ type: 'INCREMENT_ROUND' })
+}
+
+export const endBattle = (playerWon: boolean) => (dispatch: Dispatch) => {
   console.log('end battle called')
+  if(playerWon) {
+    console.log('player won')
+    dispatch({ type: 'ADD_REWARD', xpReward: 15, goldReward: 25, otherReward: null })
+    // can dispatch things to stats, etc as well
+  } else {
+    console.log('player lost') // can dispatch stat event later as well
+    dispatch({ type: 'ADD_TO_DEATHS' })
+  }
+  
+  dispatch({ type: 'CLEAR_BATTLE' })
 }
 
 
@@ -123,7 +155,7 @@ const battleReducer = (
     case 'DAMAGE_MONSTER':
       return {
         ...state,
-        monsterHealth: state.monsterHealth! - action.dmg
+        monsterHealth: state.monsterHealth! - action.damage
       }
     case 'LOADING_BATTLE':
       return {

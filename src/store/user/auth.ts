@@ -62,10 +62,13 @@ export const attemptSignup = (username: string, email: string, password: string)
         .doc(`/profiles/${user.user!.uid}`)
         .set({
           username,
-          hp: 0,
+          hp: 50, // baseHealth
+          damage: 8, // baseDamage (can change later based on their chosen 'class')
           xp: 0,
-          level: 0,
+          level: 1,
           gold: 0,
+          castle: false,
+          maxItems: 5
         })
         .catch(err => console.log(err)) // shouldn't be an error here, so not dispatching
     })

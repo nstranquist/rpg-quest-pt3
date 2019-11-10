@@ -26,7 +26,8 @@ class Home extends React.Component<IProps> {
   // constructor here if needed (maybe switch to functional component)
 
   componentDidMount() {
-    if(!this.props.profile.xp || !this.props.profile.gold || !this.props.profile.hp || !this.props.profile.level)
+    // only load profile data on first mount
+    if(!this.props.profile.xp && !this.props.profile.gold && !this.props.profile.hp && !this.props.profile.level)
       this.props.getProfileData()
   }
 
@@ -47,7 +48,7 @@ class Home extends React.Component<IProps> {
           playerXP={xp!}
           playerLevel={level!}
           playerGold={gold!}
-          playerHP={xp!} />
+          playerHP={hp!} />
         <BoxHeader title='RPGQuest' />
         <BoxSidebar headerDisplay='none'
           imgSrc='/images/player-m-02.png'

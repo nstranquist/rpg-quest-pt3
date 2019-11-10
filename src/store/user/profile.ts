@@ -10,6 +10,7 @@ export interface ProfileState {
   level: number | null // move to backend
   gold: number | null
   hp: number | null
+  damage: number | null // or undefined?
   loading: boolean
   errors: any
 }
@@ -18,9 +19,21 @@ interface getProfileData {
   readonly type: 'SET_PROFILE_DATA'
   profileData: ProfileState // beware of shallow copying
 }
+interface damagePlayer {
+  readonly type: 'DAMAGE_PLAYER'
+  damage: number
+}
+interface addReward {
+  readonly type: 'ADD_REWARD'
+  xpReward: number
+  goldReward: number
+  otherReward?: any
+}
 
 type ProfileActionTypes =
   | getProfileData
+  | damagePlayer
+  | addReward
   | { readonly type: 'SET_PROFILE_ERRORS', err: any }
   | { readonly type: 'LOADING_PROFILE' }
 
@@ -35,11 +48,12 @@ export const getProfileData = () => (dispatch: Dispatch) => {
     .then(doc => {
       console.log('user data from thunk:', doc)
       const profileData = {
-        name: doc.data()!.name,
+        name: doc.data()!.username,
         xp: doc.data()!.xp,
         level: doc.data()!.level,
         gold: doc.data()!.gold,
         hp: doc.data()!.hp,
+        damage: doc.data()!.damage,
       }
       dispatch({ type: 'SET_PROFILE_DATA', profileData})
     })
@@ -57,6 +71,7 @@ const initialState: ProfileState = {
   level: null,
   gold: null,
   hp: null,
+  damage: null,
   loading: false,
   errors: null,
 }
@@ -74,14 +89,26 @@ const profileReducer = (
         level: action.profileData.level,
         gold: action.profileData.gold,
         hp: action.profileData.hp,
+        damage: action.profileData.damage,
         loading: false,
         errors: null
+      }
+    case 'DAMAGE_PLAYER':
+      return {
+        ...state,
+        hp: state.hp! - action.damage
+      }
+    case 'ADD_REWARD':
+      return {
+        ...state,
+        xp: state.xp! + action.xpReward,
+        gold: state.gold! + action.goldReward,
+        // leaving out 'otherReward' for now
       }
     case 'LOADING_PROFILE':
       return {
         ...state,
         loading: true,
-        //errors: null   (?)
       }
     case 'SET_PROFILE_ERRORS':
       return {
