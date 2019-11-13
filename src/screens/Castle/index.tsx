@@ -1,6 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom'
 
+import { GridWrapper } from '../../styles/App.styles'
+
+
 interface IProps {
 
 }
@@ -9,12 +12,12 @@ const Castle: React.FC<IProps> = ({
 
 }) => {
   return (
-    <div className="grid castle-grid" style={{ color: 'white', textAlign: 'center', fontSize: '2em' }}>
+    <GridWrapper className="castle-grid" style={{ color: 'white', textAlign: 'center', fontSize: '2em' }}>
       Castle Screen
       <br />
       <Link to='/home' style={{color:'white'}}>
         Back</Link>
-    </div>
+    </GridWrapper>
   );
 }
 

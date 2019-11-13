@@ -6,6 +6,8 @@ import BoxHeader from '../../components/box-header'
 import BoxSidebar from '../../components/box-sidebar'
 import BoxMessageBoard from '../../components/box-messageboard'
 import ActionButton from '../../components/action-btn'
+import { GridWrapper } from '../../styles/App.styles'
+
 //import styles
 import '../screen.css'
 
@@ -15,7 +17,7 @@ const Character: React.FC = ({
 
 
   return (
-    <div className="grid profile-grid">
+    <GridWrapper className="profile-grid">
       <div style={{ position: 'absolute', top: 0,right: 0, color: 'white', padding: '.2em', margin: '.2em' }}>
         <Link to='/home' style={{ color: 'white' }}>Back</Link>
       </div>
@@ -35,7 +37,7 @@ const Character: React.FC = ({
       }}>
         <BoxMessageBoard boardTitle='Stats' margin='0' padding='0' message='Strength: Dexterity: Intelligence: Charisma: __Luck__: ' />
       </div>
-    </div>
+    </GridWrapper>
   )
 }
 

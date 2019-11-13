@@ -6,6 +6,9 @@ import BoxSidebar from '../../components/box-sidebar'
 import ActionButton from '../../components/action-btn'
 import HUD from '../../components/HUD'
 
+import { GridWrapper } from '../../styles/App.styles'
+import { LoadingBattleWrapper, BattleMenuWrapper } from '../../styles/Battle.style'
+
 //import Battle from '../containers/battle'
 import { startBattle, startPlayerTurn, startMonsterTurn, endBattle } from '../../store/battle'
 import { playerIsAlive, monsterIsAlive } from '../../store/selectors'
@@ -44,10 +47,10 @@ class Battle extends React.Component<IProps, IState> {
     this.state = {
       winner: false,
       whoWon: '',
-      //playersTurn: Math.floor(Math.random() * 2) === 0 ? true : false,
       playersTurn: true,
-      playerHUDRatio: `${this.props.player.hp / 100}em`,  // if 100 health, for every 1 pt, deducts .1em (the HUD ratio)
-      monsterHUDRatio: `${this.props.monsterHealth / 100}em`,
+      playerHUDRatio: `${Math.floor(this.props.player.hp / 100)}em`,  // if 100 health, for every 1 pt, deducts .1em (the HUD ratio)
+      monsterHUDRatio: `${Math.floor(this.props.monsterHealth / 100)}em`,
+      //playersTurn: Math.floor(Math.random() * 2) === 0 ? true : false,
     }
     //this.battle = new Battle(); // create new battle instance
     //this.battle.createBattle()
@@ -55,12 +58,6 @@ class Battle extends React.Component<IProps, IState> {
   }
   componentDidMount() {
     this.props.startBattle()
-  }
-
-  componentWillUnmount() {
-    //clearInterval(this.interval);
-    //this.cancelSetState = true;
-    //console.log('componentWillUnmount');
   }
 
   handleAttack = () => {
@@ -106,15 +103,15 @@ class Battle extends React.Component<IProps, IState> {
     } = this.props.battle
 
     return (
-      <div className="grid battle-grid" >
+      <GridWrapper className="battle-grid" >
         <HUD leftOrRight='left' />
         <HUD leftOrRight='right' />
         <BoxHeader title='Battle'
           colStart={2} colEnd={3} />
         {loading && (
-          <div className="loadingScreen" style={{position:'absolute', top:0, left:0,right:0,bottom:0, background:'black',color:'white',fontSize:'42px'}}>
+          <LoadingBattleWrapper className="loadingScreen">
             Loading Battle...
-          </div>
+          </LoadingBattleWrapper>
         )}
         <BoxSidebar headerDisplay='none'
           imgSrc='/images/player-m-02.png'
@@ -124,25 +121,16 @@ class Battle extends React.Component<IProps, IState> {
           imgAlt='A frightening monster'
           direction='right' />
         {this.state.playersTurn && !this.state.winner &&
-          < div style={{
-            paddingTop: '1.7em',
-            marginTop: '1.2em',
-            borderTopRightRadius: '2em',
-            borderTopLeftRadius: '2em',
-            background: 'rgba(0,0,0,.6)',
-            border: '3px solid red',
-            gridRowStart: '2',
-            gridRowEnd: '4',
-          }}>
+          <BattleMenuWrapper>
             <ActionButton linkName="Attack" handleClick={this.handleAttack} lineHeight={lineHeight} backgroundSize={backgroundSize} margin={margin} />
             <ActionButton linkName="Items" handleClick={this.handleUseItem} lineHeight={lineHeight} backgroundSize={backgroundSize} margin={margin} />
             <ActionButton linkName="Weapons" handleClick={this.handleSelectInventory} lineHeight={lineHeight} backgroundSize={backgroundSize} margin={margin} />
             <ActionButton linkName="Pets" handleClick={this.handleSelectInventory} lineHeight={lineHeight} backgroundSize={backgroundSize} margin={margin} />
             <ActionButton linkName="Flee" linkRoute='/home' lineHeight={lineHeight} backgroundSize={backgroundSize} margin={'0'} />
-          </div>
+          </BattleMenuWrapper>
         }
         {this.state.winner &&
-          < div style={{
+          <div style={{
             paddingTop: '1.7em',
             borderTopRightRadius: '2em',
             borderTopLeftRadius: '2em',
@@ -168,7 +156,7 @@ class Battle extends React.Component<IProps, IState> {
               backgroundSize={backgroundSize} margin={margin} />
           </div>
         }
-      </div>
+      </GridWrapper>
     );
   }
 }

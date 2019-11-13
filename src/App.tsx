@@ -11,12 +11,12 @@ import Login from './screens/Auth/Login'
 import Signup from './screens/Auth/Signup'
 import PrivateRoute from './utils/PrivateRoute'
 
-import './App.css';
+import { MainAspect } from './styles/App.styles'
 
 const App: React.FC = () => {
   return (
     <Router>
-      <main className="aspect">
+      <MainAspect>
         <audio id="title_music" src="/music/castle-in-the-sky-remix.mp3" autoPlay loop />
         <Switch>
           <Route path='/login' component={Login} />
@@ -30,7 +30,7 @@ const App: React.FC = () => {
           <Route exact path='/' component={Title} />
           <Route path='/' render={() => <Redirect to='/' />} />
         </Switch>
-      </main>
+      </MainAspect>
     </Router>
   );
 }

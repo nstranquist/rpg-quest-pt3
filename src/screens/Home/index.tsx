@@ -9,6 +9,7 @@ import MenuButton from '../../components/action-btn'
 import MessageBox from '../../components/box-messageboard'
 import MusicCheckbox from '../../components/checkbox-music'
 import InventoryBox from '../../components/box-inventory'
+import { GridWrapper } from '../../styles/App.styles'
 
 import { getProfileData, ProfileState } from '../../store/user/profile'
 import { RootState } from '../../store/root'
@@ -32,16 +33,10 @@ class Home extends React.Component<IProps> {
   }
 
   render() {
-    const {
-      name,
-      xp,
-      level,
-      gold,
-      hp,
-    } = this.props.profile
+    const { name, xp, level, gold, hp } = this.props.profile
 
     return (
-      <div className="grid home-grid">
+      <GridWrapper className="home-grid">
         <MusicCheckbox />
         <InventoryBox
           playerName={name}
@@ -54,12 +49,13 @@ class Home extends React.Component<IProps> {
           imgSrc='/images/player-m-02.png'
           imgAlt='A brave warrior' />
           {/* 4 boxes in a square (hence the different margin style values) */}
+          {/* TODO: replace with grid gutters?? */}
         <MenuButton linkName='Battle' linkRoute='/battle' margin='1em 0 0 1em' lineHeight={lineHeight} backgroundImage={actionBtnBg} />
         <MenuButton linkName='Character' linkRoute='/character' margin='1em 1em 0 0' lineHeight={lineHeight} backgroundImage={actionBtnBg} />
         <MenuButton linkName='Shop' linkRoute='/shop' margin='0 0 1em 1em' lineHeight={lineHeight} backgroundImage={actionBtnBg} />
         <MenuButton linkName='Castle' linkRoute='/castle' margin='0 1em 1em 0' lineHeight={lineHeight} backgroundImage={actionBtnBg} />
         <MessageBox message='Battle Monsters to start earning gold and xp!' />
-      </div>
+      </GridWrapper>
     )
   }
 }
