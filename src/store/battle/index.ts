@@ -1,5 +1,6 @@
 import { Dispatch } from "redux"
-import { firestore } from "../../fbConfig"
+import firebase from 'firebase'
+import { firestore, auth } from "../../fbConfig"
 
 // battle reducer mechanics
 
@@ -115,6 +116,13 @@ export const endBattle = (playerWon: boolean) => (dispatch: Dispatch) => {
   console.log('end battle called')
   if(playerWon) {
     console.log('player won')
+    firestore
+      .doc(`profiles/${auth.currentUser!.uid}`)
+      .update({
+        xp: firebase.firestore.FieldValue.increment(15),
+        gold: firebase.firestore.FieldValue.increment(25),
+        // add otherRewards support later
+      })
     dispatch({ type: 'ADD_REWARD', xpReward: 15, goldReward: 25, otherReward: null })
     // can dispatch things to stats, etc as well
   } else {

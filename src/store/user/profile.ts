@@ -44,9 +44,8 @@ export const getProfileData = () => (dispatch: Dispatch) => {
   dispatch({ type: 'LOADING_PROFILE' })
   firestore
     .doc(`profiles/${auth.currentUser!.uid}`)
-    .get()
-    .then(doc => {
-      console.log('user data from thunk:', doc)
+    .onSnapshot((doc) => {
+      console.log('doc snapshot from thunk:', doc)
       const profileData = {
         name: doc.data()!.username,
         xp: doc.data()!.xp,
@@ -56,10 +55,9 @@ export const getProfileData = () => (dispatch: Dispatch) => {
         damage: doc.data()!.damage,
       }
       dispatch({ type: 'SET_PROFILE_DATA', profileData})
-    })
-    .catch(err => {
+    }, err => {
       console.log(err)
-      dispatch({ type: 'SET_PROFILE_ERRORS', err })
+      dispatch({ type: 'SET_PROFILE_ERRORS', err})
     })
 }
 
