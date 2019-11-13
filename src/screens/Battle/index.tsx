@@ -39,6 +39,9 @@ interface IState {
   monsterHUDRatio: string
 }
 
+
+// TODO: make '100' into a max level variable, to decide the max health
+
 // IDEA: could use selectors to manage some of the battle state
 // HUD bars are 10ems each, .1em = 1%
 class Battle extends React.Component<IProps, IState> {
@@ -48,8 +51,8 @@ class Battle extends React.Component<IProps, IState> {
       winner: false,
       whoWon: '',
       playersTurn: true,
-      playerHUDRatio: `${Math.floor(this.props.player.hp / 100)}em`,  // if 100 health, for every 1 pt, deducts .1em (the HUD ratio)
-      monsterHUDRatio: `${Math.floor(this.props.monsterHealth / 100)}em`,
+      playerHUDRatio: `${(this.props.player.hp / 100) * 10}em`,  // if 100 health, for every 1 pt, deducts .1em (the HUD ratio)
+      monsterHUDRatio: `${(this.props.monsterHealth / 100) * 10}em`,
       //playersTurn: Math.floor(Math.random() * 2) === 0 ? true : false,
     }
     //this.battle = new Battle(); // create new battle instance
@@ -58,6 +61,12 @@ class Battle extends React.Component<IProps, IState> {
   }
   componentDidMount() {
     this.props.startBattle()
+  }
+  componentDidUpdate(prevProps: any) {
+    if(prevProps.player.hp !== this.props.player.hp)
+      this.setState({ playerHUDRatio: `${(this.props.player.hp / 100) * 10}em` })
+    if(prevProps.monsterHealth !== this.props.monsterHealth)
+      this.setState({ monsterHUDRatio: `${(this.props.monsterHealth / 100) * 10}em` })
   }
 
   handleAttack = () => {
@@ -104,8 +113,8 @@ class Battle extends React.Component<IProps, IState> {
 
     return (
       <GridWrapper className="battle-grid" >
-        <HUD leftOrRight='left' />
-        <HUD leftOrRight='right' />
+        <HUD direction='HUD-left' HUDRatio={this.state.playerHUDRatio} />
+        <HUD direction='HUD-right' HUDRatio={this.state.monsterHUDRatio} />
         <BoxHeader title='Battle'
           colStart={2} colEnd={3} />
         {loading && (

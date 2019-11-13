@@ -1,23 +1,29 @@
 import React from 'react'
 
-import './HUD.css'
+import { HUDContainer, HealthBar, ManaBar, Statbars, HUDBar, HUDCircle } from '../../styles/HUD.style'
 
 interface IProps {
-  leftOrRight: string
+  direction: string
+  HUDRatio: string
 }
 
 const HUD:React.FC<IProps> = ({
-  leftOrRight
+  direction,
+  HUDRatio
 }) => (
-  <div className={"HUD HUD-" + leftOrRight} >
-    <span className="circle">
+  <HUDContainer className={direction} >
+    <HUDCircle>
       Face
-    </span>
-    <div className="statbars">
-      <span className="HUD-bar healthbar"/>
-      <span className="HUD-bar manabar"/>
-    </div>
-  </div>
+    </HUDCircle>
+    <Statbars className={direction}>
+      <HUDBar>
+        <HealthBar HUDRatio={HUDRatio}  />
+      </HUDBar>
+      <HUDBar>
+        <ManaBar  />
+      </HUDBar>
+    </Statbars>
+  </HUDContainer>
 )
 
 export default HUD

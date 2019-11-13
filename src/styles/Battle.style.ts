@@ -18,6 +18,6 @@ export const BattleMenuWrapper = styled.div`
   border-top-left-radius: 2em;
   background: rgba(0,0,0,.6);
   border: 3px solid red;
-  grid-row-start: 2'
+  grid-row-start: 2;
   grid-row-end: 4;
 `

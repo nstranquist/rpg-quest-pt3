@@ -3,3 +3,4 @@ Todo:
 [] add scss precompilation to this or styled components
 [] expand button clickable area to entire button box
 [] consider using onSnapshot vs get() for userData
+[] investigate gold color, see if there are more visually appealing alternatives
