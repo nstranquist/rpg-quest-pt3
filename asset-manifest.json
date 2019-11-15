@@ -1,21 +1,21 @@
 {
   "files": {
-    "main.css": "/rpg-quest-pt3/static/css/main.806dff4b.chunk.css",
-    "main.js": "/rpg-quest-pt3/static/js/main.4033999e.chunk.js",
-    "main.js.map": "/rpg-quest-pt3/static/js/main.4033999e.chunk.js.map",
+    "main.css": "/rpg-quest-pt3/static/css/main.9216c10d.chunk.css",
+    "main.js": "/rpg-quest-pt3/static/js/main.41b9f4a0.chunk.js",
+    "main.js.map": "/rpg-quest-pt3/static/js/main.41b9f4a0.chunk.js.map",
     "runtime-main.js": "/rpg-quest-pt3/static/js/runtime-main.fb484f83.js",
     "runtime-main.js.map": "/rpg-quest-pt3/static/js/runtime-main.fb484f83.js.map",
     "static/js/2.3608944f.chunk.js": "/rpg-quest-pt3/static/js/2.3608944f.chunk.js",
     "static/js/2.3608944f.chunk.js.map": "/rpg-quest-pt3/static/js/2.3608944f.chunk.js.map",
     "index.html": "/rpg-quest-pt3/index.html",
-    "precache-manifest.0c9fe00e12f22d02b8d39cf40b703a20.js": "/rpg-quest-pt3/precache-manifest.0c9fe00e12f22d02b8d39cf40b703a20.js",
+    "precache-manifest.c23a510e6887b1e58f94743e17c42d8b.js": "/rpg-quest-pt3/precache-manifest.c23a510e6887b1e58f94743e17c42d8b.js",
     "service-worker.js": "/rpg-quest-pt3/service-worker.js",
-    "static/css/main.806dff4b.chunk.css.map": "/rpg-quest-pt3/static/css/main.806dff4b.chunk.css.map"
+    "static/css/main.9216c10d.chunk.css.map": "/rpg-quest-pt3/static/css/main.9216c10d.chunk.css.map"
   },
   "entrypoints": [
     "static/js/runtime-main.fb484f83.js",
     "static/js/2.3608944f.chunk.js",
-    "static/css/main.806dff4b.chunk.css",
-    "static/js/main.4033999e.chunk.js"
+    "static/css/main.9216c10d.chunk.css",
+    "static/js/main.41b9f4a0.chunk.js"
   ]
 }
