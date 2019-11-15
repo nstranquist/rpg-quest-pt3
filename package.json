@@ -1,7 +1,8 @@
 {
-  "name": "final-countdown",
+  "name": "rpg-quest-pt3",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://nstranquist.github.io/rpg-quest-pt3",
   "dependencies": {
     "@types/firebase": "^3.2.1",
     "@types/jest": "24.0.22",
@@ -12,6 +13,7 @@
     "@types/react-router-dom": "^5.1.2",
     "@types/styled-components": "^4.4.0",
     "firebase": "^7.3.0",
+    "gh-pages": "^2.1.1",
     "react": "^16.11.0",
     "react-dom": "^16.11.0",
     "react-redux": "^7.1.3",
@@ -26,7 +28,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "predeploy": "yarn build",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": "react-app"

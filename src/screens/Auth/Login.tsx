@@ -4,7 +4,6 @@ import { connect } from 'react-redux'
 import BoxHeader from '../../components/box-header'
 import { RootState } from '../../store/root'
 import { attemptLogin } from '../../store/user/auth'
-import { directive } from '@babel/types'
 
 interface IProps {
   isAuth: boolean
