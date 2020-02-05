@@ -1,20 +1,32 @@
-import React from 'react'
+import React, { useState } from 'react'
+import styled from 'styled-components'
 import { Link } from 'react-router-dom'
 
 //import ui components
-import BoxHeader from '../../components/box-header'
-import BoxSidebar from '../../components/box-sidebar'
-import BoxMessageBoard from '../../components/box-messageboard'
-import ActionButton from '../../components/action-btn'
+import { BoxHeader, BoxSidebar, BoxMessageBoard } from '../../components/Boxes'
+import { ActionButton } from '../../components/Buttons'
 import { GridWrapper } from '../../styles/App.styles'
 
 //import styles
 import '../screen.css'
 
+const lineHeight = '2em';
+const backgroundSize = '100% 200%';
+const margin = '0 0 .5em 0';
+
 const Character: React.FC = ({
 
 }) => {
+  const [activeStat, setActiveStat] = useState<string | null>(null)
 
+  const renderStatView = () => {
+    switch(activeStat) {
+      case 'Strength':
+        return;
+      default:
+        return;
+    }
+  }
 
   return (
     <GridWrapper className="profile-grid">
@@ -32,9 +44,7 @@ const Character: React.FC = ({
         <ActionButton lineHeight={lineHeight} backgroundSize={backgroundSize} margin={margin} linkName="Charisma" />
         <ActionButton lineHeight={lineHeight} backgroundSize={backgroundSize} margin={margin} linkName="Luck" />
       </div>
-      <div style={{
-        width: '100%', height: '100%'
-      }}>
+      <div style={{ width: '100%', height: '100%' }}>
         <BoxMessageBoard boardTitle='Stats' margin='0' padding='0' message='Strength: Dexterity: Intelligence: Charisma: __Luck__: ' />
       </div>
     </GridWrapper>
@@ -42,7 +52,3 @@ const Character: React.FC = ({
 }
 
 export default Character
-
-const lineHeight = '2em';
-const backgroundSize = '100% 200%';
-const margin = '0 0 .5em 0';

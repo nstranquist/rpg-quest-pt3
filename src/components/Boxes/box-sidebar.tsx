@@ -8,7 +8,7 @@ interface IProps {
   headerDisplay: string
 }
 
-const BoxSidebar: React.FC<IProps> = ({
+export const BoxSidebar: React.FC<IProps> = ({
   sectionHeader,
   imgSrc,
   imgAlt,
@@ -23,5 +23,3 @@ const BoxSidebar: React.FC<IProps> = ({
     </div>
   </div>
 )
-
-export default BoxSidebar

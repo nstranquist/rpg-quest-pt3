@@ -1,4 +1,5 @@
 import { combineReducers } from 'redux'
+// import reducers
 import user from './user'
 import battle from './battle'
 import game from './game'

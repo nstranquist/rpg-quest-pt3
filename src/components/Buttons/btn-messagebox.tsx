@@ -7,7 +7,7 @@ interface IProps {
   handleOnClick?(): void
 }
 
-const BoxMessageBtn: React.FC<IProps> = ({
+export const BoxMessageButton: React.FC<IProps> = ({
   buttonName,
   handleOnClick,
   screenLink
@@ -31,5 +31,3 @@ const BoxMessageBtn: React.FC<IProps> = ({
     </div>
   </div>
 )
-
-export default BoxMessageBtn

@@ -1,7 +1,7 @@
 // manages user profile data state
 // includes types, actions, and reducers
 import { Dispatch } from 'redux'
-import { auth, firestore } from '../../fbConfig'
+import { auth, firestore } from '../../utils/fbConfig'
 
 // TYPES:
 export interface ProfileState {
@@ -11,6 +11,7 @@ export interface ProfileState {
   gold: number | null
   hp: number | null
   damage: number | null // or undefined?
+  castle: boolean
   loading: boolean
   errors: any
 }
@@ -42,6 +43,7 @@ type ProfileActionTypes =
 export const getProfileData = () => (dispatch: Dispatch) => {
   console.log('called get profile data action')
   dispatch({ type: 'LOADING_PROFILE' })
+  console.log('userid:', auth.currentUser!.uid)
   firestore
     .doc(`profiles/${auth.currentUser!.uid}`)
     .onSnapshot((doc) => {
@@ -53,6 +55,7 @@ export const getProfileData = () => (dispatch: Dispatch) => {
         gold: doc.data()!.gold,
         hp: doc.data()!.hp,
         damage: doc.data()!.damage,
+        castle: doc.data()!.castle,
       }
       dispatch({ type: 'SET_PROFILE_DATA', profileData})
     }, err => {
@@ -70,6 +73,7 @@ const initialState: ProfileState = {
   gold: null,
   hp: null,
   damage: null,
+  castle: false,
   loading: false,
   errors: null,
 }
@@ -88,6 +92,7 @@ const profileReducer = (
         gold: action.profileData.gold,
         hp: action.profileData.hp,
         damage: action.profileData.damage,
+        castle: action.profileData.castle,
         loading: false,
         errors: null
       }

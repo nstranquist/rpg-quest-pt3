@@ -1,8 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom'
 // import components
-import BoxHeader from '../../components/box-header';
-import ActionButton from '../../components/action-btn';
+// import { BoxHeader } from '../../components/Boxes';
+import { ActionButton } from '../../components/Buttons';
 
 
 const Shop: React.FC = ({

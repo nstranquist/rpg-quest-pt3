@@ -1,7 +1,12 @@
 import React, { useState } from 'react'
 import { Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
-import BoxHeader from '../../components/box-header'
+// components
+import { BoxHeader } from '../../components/Boxes'
+import {
+  StyledLoginForm, StyledFormItem, StyledLoginButton, StyledLoginView, StyledError, StyledFormInput
+} from '../../styles/Login.style'
+// redux
 import { RootState } from '../../store/root'
 import { attemptLogin } from '../../store/user/auth'
 
@@ -19,39 +24,47 @@ const Login: React.FC<IProps> = ({
   errors,
   attemptLogin
 }) => {
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
+  const [loginForm, setLoginForm] = useState<any>({ email: '', password: '' })
+
+  const handleChange = (e: any) => {
+    setLoginForm({
+      ...loginForm,
+      [e.target.name]: e.target.value
+    })
+  }
+
+  const handleSubmit = (e: any) => {
+    e.preventDefault()
+    attemptLogin(loginForm.email, loginForm.password)
+  }
   
   if(isAuth)
     return <Redirect to='/home' />
   
   return (
-    <div>
-      <BoxHeader title="Login" fontSize="32" />
-      <form style={loginFormStyle} onSubmit={(e) => {
-        e.preventDefault()
-        attemptLogin(email, password)
-      }}>
-        {errors && <div style={{color: 'red', fontSize: '26px'}}>
-          <p>An error occured while logging in:</p>
-          <p>{errors.message}</p>  
-        </div>}
-        <div className="formItem">
-          {/* <label htmlFor="email">Email</label> */}
-          <input type="text" id="username" value={email} placeholder="Email..."
-            onChange={(e) => setEmail(e.target!.value)} />
-        </div>
-        <div className="formItem">
-          {/* <label htmlFor="password">Password</label> */}
-          <input type="password" id="password" value={password} placeholder="*******" 
-            onChange={(e) => setPassword(e.target!.value)}/>
-        </div>
+    <StyledLoginView>
+      <BoxHeader title="Login" fontSize="2em" />
+      <StyledLoginForm onSubmit={handleSubmit}>
+        {errors && (
+          <StyledError>
+            <p>An error occured while logging in:</p>
+            <p>{errors.message}</p>  
+          </StyledError>
+        )}
+        <StyledFormItem>
+          <BoxHeader title="Email" fontSize="1.3em" />
+          <input type="email" name="email" value={loginForm.email} placeholder="Email..." 
+            onChange={handleChange}/></StyledFormItem>
+        <StyledFormItem>
+          <BoxHeader title="Password" fontSize="1.3em" />
+          <input type="password" name="password" value={loginForm.password} placeholder="*******" 
+            onChange={handleChange}/></StyledFormItem>
+
         {!loadingAuth ? (
-          <button type="submit">Login</button>
-        ) : <button>Loading...</button>}
-        
-      </form>
-    </div>
+          <StyledLoginButton type="submit" onClick={handleSubmit}>Login</StyledLoginButton>
+        ) : <StyledLoginButton>Loading...</StyledLoginButton>}
+      </StyledLoginForm>
+    </StyledLoginView>
   )
 }
 
@@ -65,11 +78,3 @@ export default connect(
   mapStateToProps,
   { attemptLogin }
 )(Login)
-
-const loginFormStyle = {
-  // margin: '0 auto',
-  // textAlign: 'center',
-  // position: 'absolute',
-  // top: 0, bottom: 0,
-  // left: 0, right: 0,
-}

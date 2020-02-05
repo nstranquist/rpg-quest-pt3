@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Redirect, Link } from 'react-router-dom'
 import { connect } from 'react-redux'
-import BoxHeader from '../../components/box-header'
+import { BoxHeader } from '../../components/Boxes'
 import { attemptSignup, AuthState } from '../../store/user/auth'
 import { RootState } from '../../store/root'
 

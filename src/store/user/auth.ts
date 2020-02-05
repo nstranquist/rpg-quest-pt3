@@ -1,7 +1,7 @@
 // manages user authentication state
 // includes types, actions, and reducers
 import { Dispatch } from 'redux'
-import { auth, firestore } from '../../fbConfig'
+import { auth, firestore } from '../../utils/fbConfig'
 
 // TYPES:
 export interface AuthState {

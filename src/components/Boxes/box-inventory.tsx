@@ -8,7 +8,7 @@ interface IProps {
   playerHP: number
 }
 
-const InventoryBox: React.FC<IProps> = ({
+export const BoxInventory: React.FC<IProps> = ({
   playerName,
   playerLevel,
   playerXP,
@@ -32,5 +32,3 @@ const InventoryBox: React.FC<IProps> = ({
     </div>
   </div>
 )
-
-export default InventoryBox

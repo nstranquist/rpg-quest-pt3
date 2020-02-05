@@ -13,7 +13,7 @@ interface IProps {
   handleClick?(): any
 }
 
-const ActionButton: React.FC<IProps> = ({
+export const ActionButton: React.FC<IProps> = ({
   linkRoute,
   linkName,
   margin,
@@ -24,8 +24,7 @@ const ActionButton: React.FC<IProps> = ({
   lineHeight,
   handleClick,
 }) => (
-  <div className="box-btn" style={{ margin, backgroundImage,
-  }}>
+  <div className="box-btn" style={{ margin, backgroundImage, }}>
     <div className="container btn-container" style={{ backgroundSize }}>
       <Link to={linkRoute!} className="action-btn" onClick={handleClick}
         style={{ lineHeight, userSelect: 'none', MozUserSelect: 'none', fontSize, padding }}>
@@ -34,5 +33,3 @@ const ActionButton: React.FC<IProps> = ({
     </div>
   </div>
 )
-
-export default ActionButton

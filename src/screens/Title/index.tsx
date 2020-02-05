@@ -1,6 +1,6 @@
 import React from 'react'
-import BoxHeader from '../../components/box-header'
-import BoxMessageButton from '../../components/btn-messageBtn'
+import { BoxHeader } from '../../components/Boxes'
+import { BoxMessageButton } from '../../components/Buttons'
 
 interface IProps {
   toggleScreen(screenName: string): void,

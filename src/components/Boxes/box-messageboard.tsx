@@ -7,7 +7,7 @@ interface IProps {
   padding?: string
 }
 
-const BoxMessageBoard: React.FC<IProps> = ({
+export const BoxMessageBoard: React.FC<IProps> = ({
   message,
   boardTitle='Message Board',
   margin='1em',
@@ -35,5 +35,3 @@ const BoxMessageBoard: React.FC<IProps> = ({
     </div>
   </div>
 )
-
-export default BoxMessageBoard

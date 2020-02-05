@@ -1,6 +1,6 @@
 import { Dispatch } from "redux"
 import firebase from 'firebase'
-import { firestore, auth } from "../../fbConfig"
+import { firestore, auth } from "../../utils/fbConfig"
 
 // battle reducer mechanics
 

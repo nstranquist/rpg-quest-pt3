@@ -1,14 +1,10 @@
 import React from 'react'
 import { connect } from 'react-redux'
-//import { Route, Redirect, Link } from 'react-router-dom'
 
 //import ui components
-import BoxHeader from '../../components/box-header'
-import BoxSidebar from '../../components/box-sidebar'
-import MenuButton from '../../components/action-btn'
-import MessageBox from '../../components/box-messageboard'
-import MusicCheckbox from '../../components/checkbox-music'
-import InventoryBox from '../../components/box-inventory'
+import { BoxHeader, BoxSidebar, BoxInventory, BoxMessageBoard } from '../../components/Boxes'
+import { ActionButton as MenuButton } from '../../components/Buttons'
+import { MusicCheckbox } from '../../components/checkbox-music'
 import { GridWrapper } from '../../styles/App.styles'
 
 import { getProfileData, ProfileState } from '../../store/user/profile'
@@ -16,7 +12,8 @@ import { RootState } from '../../store/root'
 
 import '../screen.css'
 
-//const API_URL = 'https://us-central1-rpg-quest-4174a.cloudfunctions.net/api'
+const lineHeight = '4.5em';
+const actionBtnBg = 'url(/images/minecraft-wood.jpeg)';
 
 interface IProps {
   profile: ProfileState
@@ -38,7 +35,7 @@ class Home extends React.Component<IProps> {
     return (
       <GridWrapper className="home-grid">
         <MusicCheckbox />
-        <InventoryBox
+        <BoxInventory
           playerName={name}
           playerXP={xp!}
           playerLevel={level!}
@@ -54,7 +51,7 @@ class Home extends React.Component<IProps> {
         <MenuButton linkName='Character' linkRoute='/character' margin='1em 1em 0 0' lineHeight={lineHeight} backgroundImage={actionBtnBg} />
         <MenuButton linkName='Shop' linkRoute='/shop' margin='0 0 1em 1em' lineHeight={lineHeight} backgroundImage={actionBtnBg} />
         <MenuButton linkName='Castle' linkRoute='/castle' margin='0 1em 1em 0' lineHeight={lineHeight} backgroundImage={actionBtnBg} />
-        <MessageBox message='Battle Monsters to start earning gold and xp!' />
+        <BoxMessageBoard message='Battle Monsters to start earning gold and xp!' />
       </GridWrapper>
     )
   }
@@ -68,6 +65,3 @@ export default connect(
   mapStateToProps,
   { getProfileData }
 )(Home)
-
-const lineHeight = '4.5em';
-const actionBtnBg = 'url(/images/minecraft-wood.jpeg)';

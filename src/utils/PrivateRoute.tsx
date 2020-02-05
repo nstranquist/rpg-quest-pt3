@@ -1,7 +1,8 @@
 import React from 'react'
-import { Route, Redirect, Link } from 'react-router-dom';
+import { Route } from 'react-router-dom';
 import { connect } from 'react-redux'
 import { RootState } from '../store/root'
+import { ErrorScreen } from '../components/ErrorScreen';
 
 interface IProps {
   component: any
@@ -20,15 +21,15 @@ const PrivateRoute: React.FC<IProps> = ({
       isAuth ? (
         <Component {...props} />
       ) : (
-        // <Redirect to='/' />
-        <div>
-          <div>Error, you aren't logged in yet</div>
-          <Link to='/'>Go Back</Link>
-        </div>
+        <ErrorScreen />
       )}
   />
 )
 
+const mapStateToProps = (state: RootState) => ({
+  isAuth: state.user.auth.isAuth,
+})
+
 export default connect(
-  (state: RootState) => ({isAuth: state.user.auth.isAuth})
+  mapStateToProps
 )(PrivateRoute)

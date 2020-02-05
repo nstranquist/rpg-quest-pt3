@@ -9,7 +9,7 @@ interface IProps {
   style?: any
 }
 
-const BoxHeader: React.FC<IProps> = ({
+export const BoxHeader: React.FC<IProps> = ({
   title,
   titlePadding,
   fontSize,
@@ -27,5 +27,3 @@ const BoxHeader: React.FC<IProps> = ({
       {title}</h1>
   </div>
 )
-
-export default BoxHeader

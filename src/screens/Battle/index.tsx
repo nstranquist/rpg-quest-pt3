@@ -1,9 +1,9 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import styled from 'styled-components'
 //import ui components
-import BoxHeader from '../../components/box-header'
-import BoxSidebar from '../../components/box-sidebar'
-import ActionButton from '../../components/action-btn'
+import { BoxHeader, BoxSidebar } from '../../components/Boxes'
+import { ActionButton} from '../../components/Buttons/action-btn'
 import HUD from '../../components/HUD'
 
 import { GridWrapper } from '../../styles/App.styles'
@@ -17,6 +17,27 @@ import { RootState } from '../../store/root'
 
 //import styles
 import '../screen.css'
+
+const lineHeight = '2em';
+const backgroundSize = '100% 120%';
+const margin = '0 0 .5em 0'
+
+const StyledWinMessage = styled.div`
+  padding-top: 1.7em;
+  border-top-right-radius: 2em;
+  border-top-left-radius: 2em;
+  background: rgba(0,0,0,.6);
+  border: 3px solid red;
+  //display: 'flex';
+  //flexDirection: 'column';
+  //justifyContent: 'center';
+
+  &.win-message.inner {
+    height: 6em;
+    width: 100%;
+    background: beige;
+  }
+`
 
 interface IProps {
   player: any
@@ -139,18 +160,8 @@ class Battle extends React.Component<IProps, IState> {
           </BattleMenuWrapper>
         }
         {this.state.winner &&
-          <div style={{
-            paddingTop: '1.7em',
-            borderTopRightRadius: '2em',
-            borderTopLeftRadius: '2em',
-            background: 'rgba(0,0,0,.6)',
-            border: '3px solid red',
-            //display: 'flex',
-            //flexDirection: 'column',
-            //justifyContent: 'center',
-            // TODO: make props below respect their parent
-          }}>
-            <div style={{ height: '6em', width: '100%', background: 'beige' }}>
+          <StyledWinMessage>
+            <div className="win-message-inner">
               {this.props.playerIsAlive ? (
                 <div>
                   You Won!
@@ -163,7 +174,7 @@ class Battle extends React.Component<IProps, IState> {
             </div>
             <ActionButton linkName="Go Back" linkRoute='/home' lineHeight={lineHeight}
               backgroundSize={backgroundSize} margin={margin} />
-          </div>
+          </StyledWinMessage>
         }
       </GridWrapper>
     );
@@ -183,12 +194,6 @@ export default connect(
   mapStateToProps,
   { startBattle, startPlayerTurn, startMonsterTurn, endBattle }
 )(Battle)
-
-
-const lineHeight = '2em';
-const backgroundSize = '100% 120%';
-const margin = '0 0 .5em 0'
-
 
 
 /*
